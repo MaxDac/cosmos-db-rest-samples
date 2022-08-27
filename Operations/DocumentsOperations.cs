@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using System.Text.Json;
 using CosmosDbRestSamples.Types;
 using Microsoft.Extensions.Logging;
@@ -210,9 +211,15 @@ public class DocumentsOperations
         }}
     ]  
     }}";
-        var requestContent = new StringContent(requestBody, System.Text.Encoding.UTF8, "application/query+json");
+        StringContent requestContent = new(requestBody, System.Text.Encoding.UTF8, "application/query+json");
+        if (requestContent.Headers.ContentType is null)
+        {
+            requestContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+        }
+
         //NOTE -> this is important. CosmosDB expects a specific Content-Type with no CharSet on a query request.
         requestContent.Headers.ContentType.CharSet = "";
+
         var httpRequest = new HttpRequestMessage { Method = method, Content = requestContent, RequestUri = requestUri };
 
         var httpResponse = await m_client.SendAsync(httpRequest);
@@ -245,6 +252,11 @@ public class DocumentsOperations
     }}";
 
         var requestContent = new StringContent(requestBody, System.Text.Encoding.UTF8, "application/query+json");
+        if (requestContent.Headers.ContentType is null)
+        {
+            requestContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+        }
+
         //NOTE -> this is important. CosmosDB expects a specific Content-Type with no CharSet on a query request.
         requestContent.Headers.ContentType.CharSet = "";
         var httpRequest = new HttpRequestMessage { Method = method, Content = requestContent, RequestUri = requestUri };

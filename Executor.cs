@@ -40,41 +40,39 @@ public class Executor : IHostedService
         var item2 = new ItemDto("id2", "pk1", "value2");
         var item3 = new ItemDto("id3", "pk2", "value3");
 
+        // await m_databaseOperations.CreateDatabase(databaseId, DatabaseThoughputMode.@fixed);
 
-        await m_databaseOperations.CreateDatabase(databaseId, DatabaseThoughputMode.@fixed);
+        // await m_databaseOperations.ListDatabases();
+        // await m_databaseOperations.GetDatabase(databaseId);
 
-        await m_databaseOperations.ListDatabases();
-        await m_databaseOperations.GetDatabase(databaseId);
+        // await m_collectionsOperations.CreateContainer(databaseId, containerId, DatabaseThoughputMode.none);
 
-        await m_collectionsOperations.CreateContainer(databaseId, containerId, DatabaseThoughputMode.none);
+        // await m_collectionsOperations.GetContainer(databaseId, containerId);
+        // await m_collectionsOperations.GetContainerPartitionKeys(databaseId, containerId);
 
-        await m_collectionsOperations.GetContainer(databaseId, containerId);
-        await m_collectionsOperations.GetContainerPartitionKeys(databaseId, containerId);
-
-        await m_storedProceduresOperations.CreateStoredProcedure(databaseId, containerId, "sproc1");
-        await m_storedProceduresOperations.DeleteStoredProcedure(databaseId, containerId, "sproc1");
+        // await m_storedProceduresOperations.CreateStoredProcedure(databaseId, containerId, "sproc1");
+        // await m_storedProceduresOperations.DeleteStoredProcedure(databaseId, containerId, "sproc1");
 
         await m_documentsOperations.CreateDocument(databaseId, containerId, item1);
-        await m_documentsOperations.CreateDocument(databaseId, containerId, item2);
-        await m_documentsOperations.CreateDocument(databaseId, containerId, item3);
+        // await m_documentsOperations.CreateDocument(databaseId, containerId, item2);
+        // await m_documentsOperations.CreateDocument(databaseId, containerId, item3);
 
-        await m_documentsOperations.PatchDocument(databaseId, containerId, id: item1.id, partitionKey: item1.pk);
-        await m_documentsOperations.ReplaceDocument(databaseId, containerId, id: item1.id, newItem: item11); //cannot change partitionKey in a replace operation, but can update id
+        // await m_documentsOperations.PatchDocument(databaseId, containerId, id: item1.id, partitionKey: item1.pk);
+        // await m_documentsOperations.ReplaceDocument(databaseId, containerId, id: item1.id, newItem: item11); //cannot change partitionKey in a replace operation, but can update id
 
-        await m_documentsOperations.ListDocuments(databaseId, containerId, partitionKey: item1.pk);
-        await m_documentsOperations.GetDocument(databaseId, containerId, id: item2.id, partitionKey: item2.pk);
+        // await m_documentsOperations.ListDocuments(databaseId, containerId, partitionKey: item1.pk);
+        // await m_documentsOperations.GetDocument(databaseId, containerId, id: item2.id, partitionKey: item2.pk);
 
-        await m_documentsOperations.QueryDocuments(databaseId, containerId, partitionKey: item1.pk);
-        await m_documentsOperations.QueryDocumentsCrossPartition(databaseId, containerId);
+        // await m_documentsOperations.QueryDocuments(databaseId, containerId, partitionKey: item1.pk);
+        // await m_documentsOperations.QueryDocumentsCrossPartition(databaseId, containerId);
 
-        await m_documentsOperations.DeleteDocument(databaseId, containerId, id: item11.id, partitionKey: item11.pk);
-        await m_documentsOperations.DeleteDocument(databaseId, containerId, id: item2.id, partitionKey: item2.pk);
-        await m_documentsOperations.DeleteDocument(databaseId, containerId, id: item3.id, partitionKey: item3.pk);
+        // await m_documentsOperations.DeleteDocument(databaseId, containerId, id: item11.id, partitionKey: item11.pk);
+        // await m_documentsOperations.DeleteDocument(databaseId, containerId, id: item2.id, partitionKey: item2.pk);
+        // await m_documentsOperations.DeleteDocument(databaseId, containerId, id: item3.id, partitionKey: item3.pk);
 
+        // await m_collectionsOperations.DeleteContainer(databaseId, containerId);
 
-        await m_collectionsOperations.DeleteContainer(databaseId, containerId);
-
-        await m_databaseOperations.DeleteDatabase(databaseId);
+        // await m_databaseOperations.DeleteDatabase(databaseId);
     }
 
     public Task StopAsync(CancellationToken cancellationToken)
